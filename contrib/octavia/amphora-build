@@ -3,14 +3,34 @@
 set -e
 set -x
 
-RELEASE=buster
+if [ -n "${1}" ] ; then
+	RELEASE=${1}
+	shift
+else
+	RELEASE=buster
+fi
+
+if [ -n "${1}" ] ; then
+	MIRROR_ADDR="${1}"
+	shift
+else
+	MIRROR_ADDR=http://deb.mirror.org/debian
+fi
+
+if [ -n "${1}" ] ; then
+	SECURITY_MIRROR_ADDR=${1}
+	shift
+else
+	SECURITY_MIRROR_ADDR=http://security.debian.org/debian-security
+fi
+
 HOOK_PATH=$(dirname $0)/amphora-build-hook
 
 build-openstack-debian-image --release ${RELEASE} --hook-script ${HOOK_PATH} \
-	-u http://mirror.infomaniak.ch/debian \
-	-s http://mirror.infomaniak.ch/debian \
+	-u ${MIRROR_ADDR} \
+	-s ${MIRROR_ADDR} \
 	-e cryptsetup,acl,acpid,apparmor,apt-transport-https,at,bash-completion,cloud-guest-utils,cron,curl,dbus,dkms,dmeventd,ifenslave,ifupdown,iptables,iputils-tracepath,irqbalance,less,lsof,net-tools,netbase,netcat-openbsd,open-vm-tools,pollinate,psmisc,rsyslog,socat,tcpdump,uuid-runtime,vim-tiny,vlan,debconf,dbconfig-common \
-	--postinstall-packages joe,gpg,gpg-agent,dirmngr,keepalived,ipvsadm,iputils-ping,haproxy,dkms,ethtool,gawk \
+	--postinstall-packages haveged,joe,gpg,gpg-agent,dirmngr,keepalived,ipvsadm,iputils-ping,haproxy,dkms,ethtool,gawk \
 	--permit-ssh-as-root \
 	--output debian-${RELEASE}-octavia-amphora-$(TZ=UTC date '+%Y.%m.%d-%H.%M')-amd64 \
-	--security-mirror http://10.4.22.95:9999/security
+	--security-mirror ${SECURITY_MIRROR_ADDR
