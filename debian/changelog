@@ -1,4 +1,4 @@
-openstack-debian-images (1.37) UNRELEASED; urgency=medium
+openstack-debian-images (1.37) unstable; urgency=medium
 
   [ Thomas Goirand ]
   * Add vmnet option for non-bridge, non-vlan (ie: normal eth0) setup.
