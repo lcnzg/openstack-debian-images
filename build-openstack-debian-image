@@ -1737,7 +1737,7 @@ else
 	CONSOLE_PARAM="console=tty0 console=$CONSOLE,115200 earlyprintk=$CONSOLE,115200"
 fi
 
-KERNEL_PARAMS="nosplash text biosdevname=0 net.ifnames=0 ${CONSOLE_PARAM} consoleblank=0 systemd.show_status=true $append"
+KERNEL_PARAMS="text biosdevname=0 net.ifnames=0 ${CONSOLE_PARAM} consoleblank=0 systemd.show_status=true processor.max_cstate=0 $append"
 if [ "${BOOTMANAGER}" = "grub" ] ; then
 	sed -i -e 's|^[ #\t]*GRUB_CMDLINE_LINUX_DEFAULT[ #\t]*=.*|GRUB_CMDLINE_LINUX_DEFAULT="'"${KERNEL_PARAMS}"'"|' ${MOUNT_DIR}/etc/default/grub
 	echo "
