@@ -33,4 +33,4 @@ build-openstack-debian-image --release ${RELEASE} --hook-script ${HOOK_PATH} \
 	--postinstall-packages haveged,joe,gpg,gpg-agent,dirmngr,keepalived,ipvsadm,iputils-ping,haproxy,dkms,ethtool,gawk \
 	--permit-ssh-as-root \
 	--output debian-${RELEASE}-octavia-amphora-$(TZ=UTC date '+%Y.%m.%d-%H.%M')-amd64 \
-	--security-mirror ${SECURITY_MIRROR_ADDR
+	--security-mirror ${SECURITY_MIRROR_ADDR}
