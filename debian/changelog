@@ -1,6 +1,7 @@
 openstack-debian-images (1.38) unstable; urgency=medium
 
   * Fix syntax error in contrib/octavia/amphora-build.
+  * Fix default for MIRROR_ADDR in contrib/octavia/amphora-build.
 
  -- Thomas Goirand <zigo@debian.org>  Wed, 11 Dec 2019 11:50:05 +0100
 
